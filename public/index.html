@@ -30,7 +30,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script>
-        const socket = io('https://socket-gj.herokuapp.com/');
+        // conexion con el socket server
+        /*const socket = io('https://socket-gj.herokuapp.com/');*/
+        const socket = io('http://localhost:8080');
 
         // Referencias elementos del DOOM
         const formulario = document.querySelector('#miFormulario');
@@ -48,6 +50,13 @@
             });
         });
 
+        // para emitir
+        // socket.emit('mensaje-to-server', {data})
+        socket.on('connect', () => {
+            console.log('conectado');
+        })
+
+        // para escuchar
         socket.on('mensaje-from-server', (data) => {
             mensajes.innerHTML += `<li>${ data.texto }</li>`
         })
